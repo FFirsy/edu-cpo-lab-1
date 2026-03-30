@@ -10,6 +10,7 @@ API specified for the assignment.
 - mutable_set.py # MutableSet class implementation
 - test_mutable_set.py # Unit and property‑based tests
 
+
 ## Features
 
 - **Mutable operations** – `add`, `remove`, `filter`, `map`, `concat` all
@@ -35,8 +36,9 @@ API specified for the assignment.
 - **Wang Qifan** – (2473497039@qq.com) – Tests.
 
 ## Changelog
+
 - **2026-03-30 – 6**  
-  Fix README.md style.
+  Fix readme.md style.
 
 - **2026-03-30 – 5**  
   Fix code style.
