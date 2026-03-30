@@ -146,15 +146,21 @@ def test_map_property(lst):
     expected = {x * 2 if isinstance(x, int) else x for x in lst}
     assert set(s) == expected
 
-@given(sets_and_lists())
+@st.composite
+def int_lists(draw):
+    """Strategy to generate lists of integers (non-empty occasionally)."""
+    return draw(st.lists(st.integers()))
+
+@given(int_lists())
 def test_reduce_property(lst):
     s = MutableSet()
     s.from_list(lst)
     if lst:
-        result = s.reduce(lambda a, b: a + b if isinstance(a, int) and isinstance(b, int) else 0)
-        # We don't enforce exact equality because the order is arbitrary,
-        # but we can check that the reduction returns something.
-        assert isinstance(result, int)
+        # Use addition, which is associative and commutative
+        result = s.reduce(lambda a, b: a + b)
+        # Because addition is associative and commutative, result should equal sum of unique elements
+        expected = sum(set(lst))
+        assert result == expected
     else:
         with pytest.raises(TypeError):
             s.reduce(lambda a, b: a + b)
