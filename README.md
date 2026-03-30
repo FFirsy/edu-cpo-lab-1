@@ -33,6 +33,9 @@ The implementation handles `None` values, mixed types, and provides the full API
 - **Wang Qifan** – (2473497039@qq.com) – Tests.
 
 ## Changelog
+- **2026-03-30 – 5**  
+  Fix code style  
+
 - **2026-03-30 – 4**  
   Fix pycodestyle violations: add two blank lines before top-level functions,
   replace lambda assignments with named functions, break long lines, and
