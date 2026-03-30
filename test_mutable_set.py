@@ -1,6 +1,6 @@
 import pytest
 from hypothesis import given, strategies as st
-from src.mutable_set import MutableSet
+from mutable_set import MutableSet
 
 
 # -------------------- unit tests --------------------
