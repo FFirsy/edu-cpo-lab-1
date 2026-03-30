@@ -5,8 +5,12 @@ All operations modify the set in place, as required by the laboratory course.
 The implementation handles `None` values, mixed types, and provides the full API specified for the assignment.
 
 ## Project structure
-`mutable_set.py`   
-`test_mutable_set.py`
+
+```
+.
+├── mutable_set.py          # MutableSet class implementation
+└── test_mutable_set.py     # Unit and property‑based tests
+```
 
 ## Features
 
@@ -22,26 +26,25 @@ The implementation handles `None` values, mixed types, and provides the full API
 - **Property‑based tests** – Using Hypothesis to verify invariants (uniqueness, commutativity of add, filter correctness, monoid laws).
 - **CI ready** – GitHub Actions run linters, type checker, and tests automatically.
 
+
 ## Contribution
 
-- **Name** – LiuXuhan  
-  *Implementation and documentation.*
-- **Name** – WangQifan  
-  *tests.*
+- **Liu Xuhan** – (949699845@qq.com) – Implementation and documentation.
+- **Wang Qifan** – (2473497039@qq.com) – Tests.
 
 ## Changelog
+- **2026-03-30 - 3**  
+  Modify the readme.md and add requirements.txt  
+
 - **2026-03-30 – 2**  
   Fix property-based test for reduce: use integer-only strategy to avoid None and mixed types;
   adjust assertion to compare sum of unique elements.
 
-
 - **2026-03-30 - 1**  
-  Fix test part: def test_mixed_types(),the problem of `1` and `1.0`
-
+  Fix test_mixed_types: handle equality of `1` and `1.0`.
 
 - **2026-03-30 – 0**  
-  Initial repository setup from template.  
-  Initial submission. Completed all required features, unit tests, and property‑based tests.
+  Initial repository setup and first submission.
 
 
 ## Design notes
