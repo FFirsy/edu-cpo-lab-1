@@ -18,11 +18,11 @@ API specified for the assignment.
   when load factor exceeds 0.75.
 - **Full API support**:
 
-    - `add(elem)`, `remove(elem)`, `member(elem)`, `size()`
-    - `to_list()` / `from_list(lst)`
-    - `filter(predicate)`, `map(function)`, `reduce(function, initial)`
-    - Iterator protocol (`__iter__`)
-    - Monoid: `empty()` and `concat(other)`
+  - `add(elem)`, `remove(elem)`, `member(elem)`, `size()`
+  - `to_list()` / `from_list(lst)`
+  - `filter(predicate)`, `map(function)`, `reduce(function, initial)`
+  - Iterator protocol (`__iter__`)
+  - Monoid: `empty()` and `concat(other)`
 - **Handles special values** – `None` is accepted; mixed types (e.g., `1`  
   and `1.0`) are treated as equal (following Python semantics).
 - **Property-based tests** – Using Hypothesis to verify invariants  
