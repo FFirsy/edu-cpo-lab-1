@@ -84,8 +84,11 @@ def test_mixed_types():
     s = MutableSet()
     s.add(1)
     s.add("a")
-    s.add(1.0)
-    assert s.size() == 3
+    s.add(1.0)   # 1 和 1.0 相等，因此集合中只有两个不同元素
+    assert s.size() == 2
+    assert 1 in s
+    assert 1.0 in s      # 因为相等，所以都能找到
+    assert "a" in s
 
 # -------------------- property‑based tests --------------------
 @st.composite

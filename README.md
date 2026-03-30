@@ -30,6 +30,9 @@ The implementation handles `None` values, mixed types, and provides the full API
   *tests.*
 
 ## Changelog
+- **2026-03-30 - 1**  
+  Modify test part: def test_mixed_types(),the problem of `1` and `1.0`
+
 
 - **2026-03-30 – 0**  
   Initial repository setup from template.  
