@@ -136,7 +136,7 @@ def test_add_member(lst, x):
 
 
 @given(sets_and_lists())
-def test_remove(lst):
+def test_remove_property(lst):          # 重命名以避免与单元测试冲突
     s = MutableSet()
     s.from_list(lst)
     # pick an element that is present, if any
