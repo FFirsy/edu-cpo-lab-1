@@ -31,8 +31,8 @@ API specified for the assignment.
 
 ## Contribution
 
-- **Liu Xuhan** – (949699845@qq.com) – Implementation and documentation
-- **Wang Qifan** – (2473497039@qq.com) – Tests
+- **Liu Xuhan** – (949699845@qq.com) – Implementation and fix
+- **Wang Qifan** – (2473497039@qq.com) – Tests 、 fix and documentation
 
 ## Changelog
 
