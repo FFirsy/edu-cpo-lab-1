@@ -1,3 +1,14 @@
+# group4 - lab 1 - variant 4
+
+This project implements a mutable set using a hash map with separate chaining.
+All operations modify the set in place, as required by the laboratory course.
+The implementation handles `None` values, mixed types, and provides the full
+API specified for the assignment.
+
+## Project structure
+
+- mutable_set.py # MutableSet class implementation
+- test_mutable_set.py # Unit and property‑based tests
 
 ## Features
 
