@@ -1,6 +1,7 @@
 import pytest
 from hypothesis import given, strategies as st
-from mutable_set import MutableSet
+from src.mutable_set import MutableSet
+
 
 # -------------------- unit tests --------------------
 def test_add_and_member():
@@ -10,11 +11,13 @@ def test_add_and_member():
     assert 20 not in s
     assert s.size() == 1
 
+
 def test_add_duplicate():
     s = MutableSet()
     s.add(10)
     s.add(10)
     assert s.size() == 1
+
 
 def test_remove():
     s = MutableSet()
@@ -25,6 +28,7 @@ def test_remove():
     with pytest.raises(KeyError):
         s.remove(10)
 
+
 def test_from_list_to_list():
     s = MutableSet()
     lst = [1, 2, 3, 2, 1]
@@ -33,17 +37,20 @@ def test_from_list_to_list():
     s.from_list([])
     assert s.size() == 0
 
+
 def test_filter():
     s = MutableSet()
     s.from_list([1, 2, 3, 4])
     s.filter(lambda x: x % 2 == 0)
     assert s.to_list() == [2, 4]
 
+
 def test_map():
     s = MutableSet()
     s.from_list([1, 2, 3])
     s.map(lambda x: x * 2)
     assert set(s) == {2, 4, 6}
+
 
 def test_reduce():
     s = MutableSet()
@@ -54,16 +61,19 @@ def test_reduce():
     with pytest.raises(TypeError):
         empty.reduce(lambda a, b: a + b)
 
+
 def test_iter():
     s = MutableSet()
     s.from_list([1, 2, 3])
     elements = list(s)
     assert sorted(elements) == [1, 2, 3]
 
+
 def test_empty():
     e = MutableSet.empty()
     assert e.size() == 0
     assert isinstance(e, MutableSet)
+
 
 def test_concat():
     s1 = MutableSet()
@@ -73,6 +83,7 @@ def test_concat():
     s1.concat(s2)
     assert set(s1) == {1, 2, 3}
 
+
 def test_none():
     s = MutableSet()
     s.add(None)
@@ -80,22 +91,30 @@ def test_none():
     s.remove(None)
     assert None not in s
 
+
 def test_mixed_types():
     s = MutableSet()
     s.add(1)
     s.add("a")
-    s.add(1.0)   # 1 和 1.0 相等，因此集合中只有两个不同元素
+    s.add(1.0)   # 1 and 1.0 are equal
     assert s.size() == 2
     assert 1 in s
-    assert 1.0 in s      # 因为相等，所以都能找到
+    assert 1.0 in s
     assert "a" in s
+
 
 # -------------------- property‑based tests --------------------
 @st.composite
 def sets_and_lists(draw):
     """Strategy: generate a list of hashable elements."""
-    elems = draw(st.lists(st.one_of(st.integers(), st.none())))
-    return elems
+    return draw(st.lists(st.one_of(st.integers(), st.none())))
+
+
+@st.composite
+def int_lists(draw):
+    """Strategy to generate lists of integers (non-empty occasionally)."""
+    return draw(st.lists(st.integers()))
+
 
 @given(sets_and_lists())
 def test_from_list_preserves_uniqueness(lst):
@@ -103,6 +122,7 @@ def test_from_list_preserves_uniqueness(lst):
     s.from_list(lst)
     expected = set(lst)
     assert set(s) == expected
+
 
 @given(sets_and_lists(), st.integers())
 def test_add_member(lst, x):
@@ -113,6 +133,7 @@ def test_add_member(lst, x):
     after = set(s)
     assert after == before | {x}
     assert x in s
+
 
 @given(sets_and_lists())
 def test_remove(lst):
@@ -129,41 +150,47 @@ def test_remove(lst):
     with pytest.raises(KeyError):
         s.remove(999999)
 
+
+def even_filter(x):
+    """Return True if x is an even integer, False otherwise."""
+    return isinstance(x, int) and x % 2 == 0
+
+
 @given(sets_and_lists())
 def test_filter_property(lst):
     s = MutableSet()
     s.from_list(lst)
-    pred = lambda x: x is not None and x % 2 == 0
-    s.filter(pred)
-    expected = {x for x in lst if pred(x)}
+    s.filter(even_filter)
+    expected = {x for x in lst if even_filter(x)}
     assert set(s) == expected
+
+
+def double_int(x):
+    """Return x*2 if x is int, otherwise return x."""
+    return x * 2 if isinstance(x, int) else x
+
 
 @given(sets_and_lists())
 def test_map_property(lst):
     s = MutableSet()
     s.from_list(lst)
-    s.map(lambda x: x * 2 if isinstance(x, int) else x)
-    expected = {x * 2 if isinstance(x, int) else x for x in lst}
+    s.map(double_int)
+    expected = {double_int(x) for x in lst}
     assert set(s) == expected
 
-@st.composite
-def int_lists(draw):
-    """Strategy to generate lists of integers (non-empty occasionally)."""
-    return draw(st.lists(st.integers()))
 
 @given(int_lists())
 def test_reduce_property(lst):
     s = MutableSet()
     s.from_list(lst)
     if lst:
-        # Use addition, which is associative and commutative
         result = s.reduce(lambda a, b: a + b)
-        # Because addition is associative and commutative, result should equal sum of unique elements
         expected = sum(set(lst))
         assert result == expected
     else:
         with pytest.raises(TypeError):
             s.reduce(lambda a, b: a + b)
+
 
 @given(sets_and_lists(), sets_and_lists())
 def test_concat_property(lst1, lst2):
@@ -174,6 +201,7 @@ def test_concat_property(lst1, lst2):
     before = set(s1)
     s1.concat(s2)
     assert set(s1) == before | set(lst2)
+
 
 def test_monoid_laws():
     # empty.concat(s) == s
