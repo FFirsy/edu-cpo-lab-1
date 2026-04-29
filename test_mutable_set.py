@@ -139,7 +139,6 @@ def test_pbt_add_idempotence(lst, x):
 
 @given(st.lists(_elems), _elems)
 def test_pbt_remove_membership(lst, x):
-    """Removing an element makes it a non-member and decreases the size by one."""
     s = MutableSet()
     s.from_list(lst)
     if s.member(x):
@@ -151,7 +150,6 @@ def test_pbt_remove_membership(lst, x):
 
 @given(st.lists(_elems), st.lists(_elems), st.lists(_elems))
 def test_pbt_concat_associative(lst1, lst2, lst3):
-    """concat is associative: (s1 ++ s2) ++ s3 == s1 ++ (s2 ++ s3)."""
     s1 = MutableSet()
     s1.from_list(lst1)
     s2 = MutableSet()
@@ -176,7 +174,6 @@ def test_pbt_concat_associative(lst1, lst2, lst3):
 
 @given(st.lists(_elems))
 def test_pbt_concat_empty_identity(lst):
-    """empty() is both a left and right identity for concat."""
     s = MutableSet()
     s.from_list(lst)
 
@@ -192,7 +189,6 @@ def test_pbt_concat_empty_identity(lst):
 
 @given(st.lists(_elems))
 def test_pbt_map_no_duplicates(lst):
-    """map never produces duplicate elements in the result."""
     s = MutableSet()
     s.from_list(lst)
     s.map(lambda x: x % 5)
@@ -202,7 +198,6 @@ def test_pbt_map_no_duplicates(lst):
 
 @given(st.lists(_elems))
 def test_pbt_filter_no_duplicates(lst):
-    """filter never produces duplicate elements in the result."""
     s = MutableSet()
     s.from_list(lst)
     s.filter(lambda x: x % 2 == 0)
@@ -212,7 +207,6 @@ def test_pbt_filter_no_duplicates(lst):
 
 @given(st.lists(_elems), st.lists(_elems))
 def test_pbt_equality_consistency(lst1, lst2):
-    """If two sets are equal they have the same size and share all members."""
     s1 = MutableSet()
     s1.from_list(lst1)
     s2 = MutableSet()
