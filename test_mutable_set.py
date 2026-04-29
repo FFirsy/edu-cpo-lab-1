@@ -118,7 +118,6 @@ _elems = st.integers(min_value=-100, max_value=100)
 
 @given(st.lists(_elems))
 def test_pbt_from_to_list_set_semantics(lst):
-    """to_list after from_list has no duplicates and contains exactly the unique elements."""
     s = MutableSet()
     s.from_list(lst)
     result = s.to_list()
@@ -128,7 +127,6 @@ def test_pbt_from_to_list_set_semantics(lst):
 
 @given(st.lists(_elems), _elems)
 def test_pbt_add_idempotence(lst, x):
-    """Adding an element a second time leaves size and membership unchanged."""
     s = MutableSet()
     s.from_list(lst)
     s.add(x)

@@ -1,4 +1,13 @@
-from typing import Any, Callable, Generic, Iterable, Iterator, List, Optional, TypeVar
+from typing import (
+    Any,
+    Callable,
+    Generic,
+    Iterable,
+    Iterator,
+    List,
+    Optional,
+    TypeVar,
+)
 
 T = TypeVar("T")
 S = TypeVar("S")
